@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111111">
+<title>Try To Tach</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f7f7f7;
+  color:#111;
+}
+header{
+  position:sticky;
+  top:0;
+  z-index:10;
+  background:white;
+  padding:14px;
+  border-bottom:1px solid #eee;
+}
+.top{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.logo{
+  font-size:22px;
+  font-weight:800;
+  white-space:nowrap;
+}
+.search{
+  flex:1;
+  border:0;
+  outline:0;
+  background:#f0f0f0;
+  border-radius:25px;
+  padding:12px 15px;
+  font-size:15px;
+}
+.login{
+  border:0;
+  background:#111;
+  color:white;
+  padding:10px 13px;
+  border-radius:20px;
+}
+main{padding:15px}
+.hero{
+  background:#111;
+  color:white;
+  border-radius:22px;
+  padding:24px;
+  margin-bottom:18px;
+}
+.hero h1{margin:0 0 8px;font-size:30px}
+.hero p{margin:0;color:#ccc}
+.chips{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding-bottom:5px;
+}
+.chip{
+  border:0;
+  background:#e9e9e9;
+  border-radius:20px;
+  padding:10px 15px;
+  white-space:nowrap;
+}
+h2{margin:20px 0 12px}
+.grid{
+  columns:2 160px;
+  column-gap:12px;
+}
+.card{
+  break-inside:avoid;
+  background:white;
+  border-radius:16px;
+  overflow:hidden;
+  margin-bottom:12px;
+  box-shadow:0 2px 10px #00000012;
+}
+.pic{
+  height:210px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:65px;
+  background:linear-gradient(135deg,#ddd,#fafafa);
+}
+.info{padding:12px}
+.info b{font-size:15px}
+.small{color:#777;font-size:12px}
+.pin{
+  float:right;
+  border:0;
+  background:#111;
+  color:white;
+  border-radius:18px;
+  padding:7px 12px;
+}
+.product{
+  margin-top:10px;
+  width:100%;
+  border:0;
+  background:#f1f1f1;
+  padding:10px;
+  border-radius:12px;
+  font-weight:bold;
+}
+.ai{
+  position:fixed;
+  right:18px;
+  bottom:20px;
+  width:60px;
+  height:60px;
+  border:0;
+  border-radius:50%;
+  background:#111;
+  color:white;
+  font-weight:bold;
+  font-size:16px;
+  box-shadow:0 5px 20px #0004;
+}
+#message{
+  display:none;
+  position:fixed;
+  left:15px;
+  right:15px;
+  bottom:90px;
+  background:white;
+  padding:18px;
+  border-radius:16px;
+  box-shadow:0 5px 25px #0003;
+  z-index:20;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="top">
+    <div class="logo">Try To Tach</div>
+    <input class="search" id="search" placeholder="Search fashion, rings, ideas...">
+    <button class="login" onclick="login()">Login</button>
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+  <h1>Discover. Try. Shop.</h1>
+  <p>Find creative ideas, discover products and shop from your favourite websites.</p>
+</section>
+
+<div class="chips">
+  <button class="chip">✨ For You</button>
+  <button class="chip">👗 Clothes</button>
+  <button class="chip">💍 Rings</button>
+  <button class="chip">👟 Shoes</button>
+  <button class="chip">🎨 Cartoon</button>
+  <button class="chip">🔥 Trending</button>
+</div>
+
+<h2>For You</h2>
+
+<div class="grid" id="grid">
+
+<div class="card">
+  <div class="pic">👗</div>
+  <div class="info">
+    <button class="pin" onclick="pin(this)">Pin</button>
+    <b>Fashion Dress</b>
+    <div class="small">Women's fashion • #dress #fashion</div>
+    <button class="product" onclick="product()">🛍️ View Product</button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="pic">💍</div>
+  <div class="info">
+    <button class="pin" onclick="pin(this)">Pin</button>
+    <b>Elegant Ring</b>
+    <div class="small">Jewellery • #ring #style</div>
+    <button class="product" onclick="product()">🛍️ View Product</button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="pic">👟</div>
+  <div class="info">
+    <button class="pin" onclick="pin(this)">Pin</button>
+    <b>Street Shoes</b>
+    <div class="small">Shoes • #shoes #trending</div>
+    <button class="product" onclick="product()">🛍️ View Product</button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="pic">🧸</div>
+  <div class="info">
+    <button class="pin" onclick="pin(this)">Pin</button>
+    <b>Creative Cartoon</b>
+    <div class="small">Creative • #cartoon #art</div>
+    <button class="product" onclick="product()">🛍️ View Product</button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="pic">👕</div>
+  <div class="info">
+    <button class="pin" onclick="pin(this)">Pin</button>
+    <b>Cool T-Shirt</b>
+    <div class="small">Men's fashion • #tshirt #style</div>
+    <button class="product" onclick="product()">🛍️ View Product</button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="pic">👜</div>
+  <div class="info">
+    <button class="pin" onclick="pin(this)">Pin</button>
+    <b>Fashion Bag</b>
+    <div class="small">Accessories • #bag #fashion</div>
+    <button class="product" onclick="product()">🛍️ View Product</button>
+  </div>
+</div>
+
+</div>
+</main>
+
+<button class="ai" onclick="ai()">AI ✨</button>
+
+<div id="message"></div>
+
+<script>
+
+function login(){
+  show("🔐 Google Login setup will be connected here.");
+}
+
+function pin(button){
+  button.innerText="✓ Pinned";
+  button.style.background="#555";
+}
+
+function product(){
+  show("🛍️ Product page<br><br>Later we will connect Amazon affiliate links and other shopping websites here.");
+}
+
+function ai(){
+  show("✨ AI Assistant<br><br>Upload a photo or selfie to get fashion and product suggestions.");
+}
+
+function show(text){
+  let box=document.getElementById("message");
+  box.innerHTML=text+"<br><br><button onclick=\"closeBox()\">Close</button>";
+  box.style.display="block";
+}
+
+function closeBox(){
+  document.getElementById("message").style.display="none";
+}
+
+document.getElementById("search").addEventListener("input",function(){
+  let value=this.value.toLowerCase();
+  document.querySelectorAll(".card").forEach(card=>{
+    card.style.display=card.innerText.toLowerCase().includes(value)
+      ?"block":"none";
+  });
+});
+
+</script>
+
+</body>
+</html>
