@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#111111">
+<meta name="description" content="Discover, try, and shop fashion products">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Try To Tach">
+<meta name="apple-itunes-app" content="app-id=1234567890">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect fill='%23111111' width='180' height='180'/><text x='90' y='100' font-size='70' font-weight='bold' fill='white' text-anchor='middle' dy='.3em'>TT</text></svg>">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%23111111' width='192' height='192'/><text x='96' y='120' font-size='80' font-weight='bold' fill='white' text-anchor='middle'>TT</text></svg>">
 <title>Try To Tach</title>
 
 <style>
@@ -138,6 +146,27 @@ h2{margin:20px 0 12px}
   box-shadow:0 5px 25px #0003;
   z-index:20;
 }
+.download-btn {
+  display:flex;
+  gap:8px;
+  justify-content:center;
+  margin:15px 0;
+}
+.store-btn {
+  border:0;
+  padding:10px 15px;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+}
+.app-store {
+  background:#000;
+  color:white;
+}
+.play-store {
+  background:#00C050;
+  color:white;
+}
 </style>
 </head>
 
@@ -157,6 +186,11 @@ h2{margin:20px 0 12px}
   <h1>Discover. Try. Shop.</h1>
   <p>Find creative ideas, discover products and shop from your favourite websites.</p>
 </section>
+
+<div class="download-btn">
+  <button class="store-btn app-store" onclick="downloadAppStore()">📱 App Store</button>
+  <button class="store-btn play-store" onclick="downloadPlayStore()">🎮 Play Store</button>
+</div>
 
 <div class="chips">
   <button class="chip">✨ For You</button>
@@ -239,6 +273,9 @@ h2{margin:20px 0 12px}
 <div id="message"></div>
 
 <script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(err => console.log('SW registration failed:', err));
+}
 
 function login(){
   show("🔐 Google Login setup will be connected here.");
@@ -255,6 +292,14 @@ function product(){
 
 function ai(){
   show("✨ AI Assistant<br><br>Upload a photo or selfie to get fashion and product suggestions.");
+}
+
+function downloadAppStore(){
+  show("📱 App Store<br><br>Try To Tach is coming soon to Apple App Store!<br><br>Coming Soon!");
+}
+
+function downloadPlayStore(){
+  show("🎮 Google Play Store<br><br>Try To Tach is coming soon to Google Play Store!<br><br>Coming Soon!");
 }
 
 function show(text){
@@ -275,6 +320,12 @@ document.getElementById("search").addEventListener("input",function(){
   });
 });
 
+// Install prompt handling for PWA
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+});
 </script>
 
 </body>
